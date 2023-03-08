@@ -1,0 +1,26 @@
+:root {
+  --background-light-general: #f8f9fa;
+  --background-dark-general: #212529;
+  --color-light-1: #f1f3f5;
+  --color-light-2: #dee2e6;
+  --color-dark-1: #343a40;
+  --color-dark-2: #495057;
+  --color-green: #7effa5;
+  --color-green-hover: #60fd8f;
+  --color-red: #ffa496;
+  --color-red-hover: #ff9888;
+}
+:root .dark-mode {
+  --background-light-general: #212529;
+  --background-dark-general: #f8f9fa;
+  --color-light-1: #343a40;
+  --color-light-2: #495057;
+  --color-dark-1: #f1f3f5;
+  --color-dark-2: #dee2e6;
+  --color-green: #008929;
+  --color-green-hover: #007b25;
+  --color-red: #bd1900;
+  --color-red-hover: #a51600;
+}
+
+/*# sourceMappingURL=colors.css.map */

@@ -1,0 +1,63 @@
+:host {
+  --cursor: pointer;
+  --display: flex;
+  --align-items: center;
+  --justify-content: center;
+  --background: var(--color-light-1);
+  --background-hover: var(--color-light-2);
+  --color: var(--color-dark-1);
+  --height: 40px;
+  --width: 60px;
+  --padding: 0;
+  --border: 1px solid var(--color-dark-1);
+  --border-radius: 4px;
+  --font-family: sans-serif;
+  --font-weight: 400;
+  --font-size: 28px;
+  --transition: all 0.3s ease-out;
+}
+
+.calc-button {
+  &__content {
+    cursor: var(--cursor);
+    display: var(--display);
+    align-items: var(--align-items);
+    justify-content: var(--justify-content);
+    background-color: var(--background);
+    color: var(--color);
+    height: var(--height);
+    width: var(--width);
+    padding: var(--padding);
+    border: var(--border);
+    border-radius: var(--border-radius);
+    font-family: var(--font-family);
+    font-weight: var(--font-weight);
+    font-size: var(--font-size);
+    transition: var(--transition);
+
+    &:hover,
+    &:active {
+      background-color: var(--background-hover);
+    }
+  }
+
+  &__number {
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  &__span {
+    transform: translateY(-2px);
+  }
+}
+
+// color
+:host([color='green']) {
+  --background: var(--color-green);
+  --background-hover: var(--color-green-hover);
+}
+
+:host([color='red']) {
+  --background: var(--color-red);
+  --background-hover: var(--color-red-hover);
+}
