@@ -12,6 +12,8 @@ export namespace Components {
         "buttonType": EnumButtonType;
         "color"?: EnumButtonColor;
     }
+    interface CalcComponent {
+    }
     interface CalcContainer {
     }
     interface CalcDisplay {
@@ -30,6 +32,12 @@ declare global {
         prototype: HTMLCalcButtonElement;
         new (): HTMLCalcButtonElement;
     };
+    interface HTMLCalcComponentElement extends Components.CalcComponent, HTMLStencilElement {
+    }
+    var HTMLCalcComponentElement: {
+        prototype: HTMLCalcComponentElement;
+        new (): HTMLCalcComponentElement;
+    };
     interface HTMLCalcContainerElement extends Components.CalcContainer, HTMLStencilElement {
     }
     var HTMLCalcContainerElement: {
@@ -44,6 +52,7 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "calc-button": HTMLCalcButtonElement;
+        "calc-component": HTMLCalcComponentElement;
         "calc-container": HTMLCalcContainerElement;
         "calc-display": HTMLCalcDisplayElement;
     }
@@ -54,6 +63,8 @@ declare namespace LocalJSX {
         "color"?: EnumButtonColor;
         "onButtonClick"?: (event: CalcButtonCustomEvent<string>) => void;
     }
+    interface CalcComponent {
+    }
     interface CalcContainer {
     }
     interface CalcDisplay {
@@ -62,6 +73,7 @@ declare namespace LocalJSX {
     }
     interface IntrinsicElements {
         "calc-button": CalcButton;
+        "calc-component": CalcComponent;
         "calc-container": CalcContainer;
         "calc-display": CalcDisplay;
     }
@@ -71,6 +83,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "calc-button": LocalJSX.CalcButton & JSXBase.HTMLAttributes<HTMLCalcButtonElement>;
+            "calc-component": LocalJSX.CalcComponent & JSXBase.HTMLAttributes<HTMLCalcComponentElement>;
             "calc-container": LocalJSX.CalcContainer & JSXBase.HTMLAttributes<HTMLCalcContainerElement>;
             "calc-display": LocalJSX.CalcDisplay & JSXBase.HTMLAttributes<HTMLCalcDisplayElement>;
         }
