@@ -1,43 +1,45 @@
 :host {
-  --cursor: pointer;
-  --display: flex;
-  --align-items: center;
-  --justify-content: center;
-  --background: var(--color-light-1);
-  --background-hover: var(--color-light-2);
+  --calc-button-cursor: pointer;
+  --calc-button-display: flex;
+  --calc-button-align-items: center;
+  --calc-button-justify-content: center;
+  --calc-button-background: var(--color-light-1);
+  --calc-button-background-hover: var(--color-light-2);
   --color: var(--color-dark-1);
-  --height: 40px;
-  --width: 60px;
-  --padding: 0;
-  --border: 1px solid var(--color-dark-1);
-  --border-radius: 4px;
-  --font-family: sans-serif;
-  --font-weight: 400;
-  --font-size: 28px;
-  --transition: all 0.3s ease-out;
+  --calc-button-height: 40px;
+  --calc-button-width: 60px;
+  --calc-button-padding: 0;
+  --calc-button-border: 1px solid var(--color-dark-1);
+  --calc-button-border-radius: 4px;
+  --calc-button-font-family: sans-serif;
+  --calc-button-font-weight: 400;
+  --calc-button-font-size: 28px;
+  --calc-button-transition: all 0.3s ease-out;
+
+  box-sizing: border-box;
 }
 
 .calc-button {
   &__content {
-    cursor: var(--cursor);
-    display: var(--display);
-    align-items: var(--align-items);
-    justify-content: var(--justify-content);
-    background-color: var(--background);
+    cursor: var(--calc-button-cursor);
+    display: var(--calc-button-display);
+    align-items: var(--calc-button-align-items);
+    justify-content: var(--calc-button-justify-content);
+    background-color: var(--calc-button-background);
     color: var(--color);
-    height: var(--height);
-    width: var(--width);
-    padding: var(--padding);
-    border: var(--border);
-    border-radius: var(--border-radius);
-    font-family: var(--font-family);
-    font-weight: var(--font-weight);
-    font-size: var(--font-size);
-    transition: var(--transition);
+    height: var(--calc-button-height);
+    width: var(--calc-button-width);
+    padding: var(--calc-button-padding);
+    border: var(--calc-button-border);
+    border-radius: var(--calc-button-border-radius);
+    font-family: var(--calc-button-font-family);
+    font-weight: var(--calc-button-font-weight);
+    font-size: var(--calc-button-font-size);
+    transition: var(--calc-button-transition);
 
     &:hover,
     &:active {
-      background-color: var(--background-hover);
+      background-color: var(--calc-button-background-hover);
     }
   }
 
@@ -52,12 +54,12 @@
 }
 
 // color
-:host([color='green']) {
-  --background: var(--color-green);
-  --background-hover: var(--color-green-hover);
+:host([button-color='green']) {
+  --calc-button-background: var(--color-green);
+  --calc-button-background-hover: var(--color-green-hover);
 }
 
-:host([color='red']) {
-  --background: var(--color-red);
-  --background-hover: var(--color-red-hover);
+:host([button-color='red']) {
+  --calc-button-background: var(--color-red);
+  --calc-button-background-hover: var(--color-red-hover);
 }

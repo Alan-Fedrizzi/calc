@@ -9,8 +9,8 @@ import { EnumButtonColor, EnumButtonType } from "./utils/utils";
 export { EnumButtonColor, EnumButtonType } from "./utils/utils";
 export namespace Components {
     interface CalcButton {
+        "buttonColor"?: EnumButtonColor;
         "buttonType": EnumButtonType;
-        "color"?: EnumButtonColor;
     }
     interface CalcComponent {
     }
@@ -59,8 +59,8 @@ declare global {
 }
 declare namespace LocalJSX {
     interface CalcButton {
+        "buttonColor"?: EnumButtonColor;
         "buttonType"?: EnumButtonType;
-        "color"?: EnumButtonColor;
         "onButtonClick"?: (event: CalcButtonCustomEvent<string>) => void;
     }
     interface CalcComponent {

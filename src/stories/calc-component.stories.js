@@ -21,7 +21,7 @@ const Template = ({ darkMode }) => {
 
     <div class="container ${darkMode ? 'dark-mode' : ''}">
       <!-- component markdown -->
-      <calc-component> TESTE </calc-component>
+      <calc-component></calc-component>
       <!-- !component markdown -->
     </div>
   `;

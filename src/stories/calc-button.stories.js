@@ -5,7 +5,7 @@ export default {
   title: 'Components/Calc Button',
 };
 
-const Template = ({ buttonType, color, darkMode }) => {
+const Template = ({ buttonType, buttonColor, darkMode }) => {
   return html`
     <style>
       .container {
@@ -19,7 +19,7 @@ const Template = ({ buttonType, color, darkMode }) => {
 
     <div class="container ${darkMode ? 'dark-mode' : ''}">
       <!-- component markdown -->
-      <calc-button button-type=${buttonType} color=${color}></calc-button>
+      <calc-button button-type=${buttonType} button-color=${buttonColor}></calc-button>
       <!-- !component markdown -->
     </div>
   `;
@@ -34,7 +34,7 @@ Default.argTypes = {
     },
     defaultValue: 'number-0',
   },
-  color: {
+  buttonColor: {
     options: [undefined, 'green', 'red'],
     control: {
       type: 'select',

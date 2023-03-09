@@ -8,7 +8,7 @@ import { EnumButtonColor, EnumButtonType } from '../../utils/utils';
 })
 export class CalcButton {
   @Prop({ reflect: true }) buttonType: EnumButtonType;
-  @Prop({ reflect: true }) color?: EnumButtonColor;
+  @Prop({ reflect: true }) buttonColor?: EnumButtonColor;
 
   @Event({ bubbles: true, composed: true }) buttonClick: EventEmitter<string>;
 

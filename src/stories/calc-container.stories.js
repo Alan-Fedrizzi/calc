@@ -27,8 +27,8 @@ const Template = ({ darkMode }) => {
           <h3 class="dummy-text">Just to simulate some content inside this component</h3>
           <p class="dummy-text">Ok?</p>
           <calc-button button-type="number-5"></calc-button>
-          <calc-button button-type="equal" color="green"></calc-button>
-          <calc-button button-type="divide" color="red"></calc-button>
+          <calc-button button-type="equal" button-color="green"></calc-button>
+          <calc-button button-type="divide" button-color="red"></calc-button>
         </div>
       </calc-container>
       <!-- !component markdown -->
