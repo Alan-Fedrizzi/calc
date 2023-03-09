@@ -21,9 +21,7 @@ const Template = ({ darkMode }) => {
 
     <div class="container ${darkMode ? 'dark-mode' : ''}">
       <!-- component markdown -->
-      <calc-display>
-        <span> Teste... </span>
-      </calc-display>
+      <calc-display calc-data="150 - 210" calc-input="210"> </calc-display>
       <!-- !component markdown -->
     </div>
   `;

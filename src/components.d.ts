@@ -15,6 +15,8 @@ export namespace Components {
     interface CalcContainer {
     }
     interface CalcDisplay {
+        "calcData": string;
+        "calcInput": string;
     }
 }
 export interface CalcButtonCustomEvent<T> extends CustomEvent<T> {
@@ -55,6 +57,8 @@ declare namespace LocalJSX {
     interface CalcContainer {
     }
     interface CalcDisplay {
+        "calcData"?: string;
+        "calcInput"?: string;
     }
     interface IntrinsicElements {
         "calc-button": CalcButton;
