@@ -21,35 +21,10 @@ export class CalcButton {
 
     let text: string;
 
-    if (buttonType === EnumButtonType.NUMBER0) {
-      text = <span class="calc-button__number"> 0 </span>;
-    }
-    if (buttonType === EnumButtonType.NUMBER1) {
-      text = <span class="calc-button__number"> 1 </span>;
-    }
-    if (buttonType === EnumButtonType.NUMBER2) {
-      text = <span class="calc-button__number"> 2 </span>;
-    }
-    if (buttonType === EnumButtonType.NUMBER3) {
-      text = <span class="calc-button__number"> 3 </span>;
-    }
-    if (buttonType === EnumButtonType.NUMBER4) {
-      text = <span class="calc-button__number"> 4 </span>;
-    }
-    if (buttonType === EnumButtonType.NUMBER5) {
-      text = <span class="calc-button__number"> 5 </span>;
-    }
-    if (buttonType === EnumButtonType.NUMBER6) {
-      text = <span class="calc-button__number"> 6 </span>;
-    }
-    if (buttonType === EnumButtonType.NUMBER7) {
-      text = <span class="calc-button__number"> 7 </span>;
-    }
-    if (buttonType === EnumButtonType.NUMBER8) {
-      text = <span class="calc-button__number"> 8 </span>;
-    }
-    if (buttonType === EnumButtonType.NUMBER9) {
-      text = <span class="calc-button__number"> 9 </span>;
+    for (let i = 0; i <= 9; i++) {
+      if (buttonType === `number-${i}`) {
+        text = <span class="calc-button__number"> {i} </span>;
+      }
     }
     if (buttonType === EnumButtonType.CLEAR) {
       text = <span class="calc-button__number"> C </span>;
@@ -68,6 +43,18 @@ export class CalcButton {
     }
     if (buttonType === EnumButtonType.EQUAL) {
       text = <span>=</span>;
+    }
+    if (buttonType === EnumButtonType.BACKSPACE) {
+      text = <span class="calc-button__number">???</span>;
+    }
+    if (buttonType === EnumButtonType.SQRT) {
+      text = <span class="calc-button__number">√x</span>;
+    }
+    if (buttonType === EnumButtonType.SQUARE) {
+      text = <span class="calc-button__number">x²</span>;
+    }
+    if (buttonType === EnumButtonType.DOT) {
+      text = <span class="calc-button__number">,</span>;
     }
 
     return (

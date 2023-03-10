@@ -13,6 +13,8 @@ export namespace Components {
         "buttonType": EnumButtonType;
     }
     interface CalcComponent {
+        "calcDisplayData": string;
+        "calcDisplayInput": string;
     }
     interface CalcContainer {
     }
@@ -64,6 +66,8 @@ declare namespace LocalJSX {
         "onButtonClick"?: (event: CalcButtonCustomEvent<string>) => void;
     }
     interface CalcComponent {
+        "calcDisplayData"?: string;
+        "calcDisplayInput"?: string;
     }
     interface CalcContainer {
     }

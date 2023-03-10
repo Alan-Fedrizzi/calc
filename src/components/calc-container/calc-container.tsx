@@ -1,4 +1,4 @@
-import { Component, Host, h, Listen } from '@stencil/core';
+import { Component, Host, h } from '@stencil/core';
 
 @Component({
   tag: 'calc-container',
@@ -6,11 +6,6 @@ import { Component, Host, h, Listen } from '@stencil/core';
   shadow: true,
 })
 export class CalcContainer {
-  @Listen('buttonClick', { target: 'body' })
-  onCalcButtonClick(event: CustomEvent) {
-    console.log(event);
-  }
-
   render() {
     return (
       <Host class="calc-container">

@@ -3,6 +3,14 @@
 <!-- Auto Generated Below -->
 
 
+## Properties
+
+| Property           | Attribute            | Description | Type     | Default |
+| ------------------ | -------------------- | ----------- | -------- | ------- |
+| `calcDisplayData`  | `calc-display-data`  |             | `string` | `''`    |
+| `calcDisplayInput` | `calc-display-input` |             | `string` | `''`    |
+
+
 ## Dependencies
 
 ### Depends on

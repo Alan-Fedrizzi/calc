@@ -17,6 +17,12 @@ const Template = ({ darkMode }) => {
       .dummy-text {
         color: var(--color-dark-2);
       }
+
+      .oie {
+        height: 24px;
+        width: 24px;
+        stroke: red;
+      }
     </style>
 
     <div class="container ${darkMode ? 'dark-mode' : ''}">

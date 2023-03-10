@@ -15,6 +15,10 @@ export enum EnumButtonType {
   MULTIPLY = 'multiply',
   DIVIDE = 'divide',
   EQUAL = 'equal',
+  BACKSPACE = 'backspace',
+  SQRT = 'sqrt',
+  SQUARE = 'square',
+  DOT = 'dot',
 }
 
 export enum EnumButtonColor {

@@ -4,7 +4,7 @@ export default {
   title: 'Components/Calc Display',
 };
 
-const Template = ({ darkMode }) => {
+const Template = ({ calcData, calcInput, darkMode }) => {
   return html`
     <style>
       .container {
@@ -21,7 +21,7 @@ const Template = ({ darkMode }) => {
 
     <div class="container ${darkMode ? 'dark-mode' : ''}">
       <!-- component markdown -->
-      <calc-display calc-data="150 - 210" calc-input="210"> </calc-display>
+      <calc-display calc-data="${calcData}" calc-input="${calcInput}"> </calc-display>
       <!-- !component markdown -->
     </div>
   `;
@@ -29,6 +29,14 @@ const Template = ({ darkMode }) => {
 
 export const Default = Template.bind({});
 Default.argTypes = {
+  calcData: {
+    control: { type: 'text' },
+    defaultValue: '95 - 210',
+  },
+  calcInput: {
+    control: { type: 'text' },
+    defaultValue: '210',
+  },
   darkMode: {
     darkMode: false,
     control: { type: 'boolean' },
