@@ -2,7 +2,7 @@
   --calc-display-display: flex;
   --calc-display-flex-direction: column;
   --calc-display-align-items: flex-end;
-  --calc-display-justify-content: center;
+  --calc-display-justify-content: space-between;
   --calc-display-gap: 10px;
   --calc-display-background: var(--color-light-1);
   --calc-display-width: 100%;
@@ -17,6 +17,7 @@
   --calc-display-input-font-weight: 600;
   --calc-display-input-font-size: 32px;
   --calc-display-input-color: var(--color-dark-2);
+  --calc-display-height: 101px;
 
   box-sizing: border-box;
 }
@@ -32,6 +33,7 @@
   padding: var(--calc-display-padding);
   border: var(--calc-display-border);
   border-radius: var(--calc-display-border-radius);
+  height: var(--calc-display-height);
 }
 
 :host .calc-display__data {

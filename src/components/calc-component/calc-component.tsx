@@ -12,14 +12,41 @@ export class CalcComponent {
   @Prop() calcDisplayInput: string = '';
   @Prop() calcDisplayData: string = '';
 
-  getDisplayElement() {
+  componentDidLoad() {
     this.calcDisplayElement = this.hostElement.shadowRoot.querySelector('calc-display');
   }
 
   setCalcDisplayInput(text: string) {
-    this.getDisplayElement();
     this.calcDisplayInput = this.calcDisplayInput + text;
     this.calcDisplayElement.setAttribute('calc-input', this.calcDisplayInput);
+  }
+
+  clearCalcDisplay() {
+    this.clearCalcDisplayData();
+    this.clearCalcDisplayInput();
+  }
+
+  clearCalcDisplayData() {
+    this.calcDisplayElement.setAttribute('calc-data', '');
+  }
+
+  clearCalcDisplayInput() {
+    this.calcDisplayElement.setAttribute('calc-input', '');
+    this.calcDisplayInput = '';
+  }
+
+  transferToDisplayData() {
+    const calcInputText = this.calcDisplayElement.getAttribute('calc-input');
+    this.calcDisplayElement.setAttribute('calc-data', calcInputText);
+    this.clearCalcDisplayInput();
+  }
+
+  onCalcButtonClickNumber() {
+    console.log('number');
+  }
+
+  onCalcButtonClickOperation() {
+    console.log('operation');
   }
 
   @Listen('buttonClick', { target: 'body' })
@@ -30,20 +57,23 @@ export class CalcComponent {
       }
     }
     if (event.detail === 'clear') {
-      this.calcDisplayData = '';
-      this.calcDisplayInput = '';
+      this.clearCalcDisplay();
     }
     if (event.detail === 'add') {
-      this.setCalcDisplayInput('+');
+      this.setCalcDisplayInput(' + ');
+      this.transferToDisplayData();
     }
     if (event.detail === 'subtract') {
-      this.setCalcDisplayInput('-');
+      this.setCalcDisplayInput(' - ');
+      this.transferToDisplayData();
     }
     if (event.detail === 'multiply') {
-      this.setCalcDisplayInput('x');
+      this.setCalcDisplayInput(' x ');
+      this.transferToDisplayData();
     }
     if (event.detail === 'divide') {
-      this.setCalcDisplayInput('÷');
+      this.setCalcDisplayInput(' ÷ ');
+      this.transferToDisplayData();
     }
     if (event.detail === 'equal') {
       this.setCalcDisplayInput('=');
@@ -67,7 +97,7 @@ export class CalcComponent {
       <Host class="calc-component">
         <calc-container>
           <div class="calc-component__column">
-            <calc-display calc-data="150 - 210" calc-input="210"></calc-display>
+            <calc-display calc-data="" calc-input=""></calc-display>
             <div class="calc-component__grid">
               <calc-button button-type="clear" button-color="green"></calc-button>
               <calc-button button-type="sqrt"></calc-button>
