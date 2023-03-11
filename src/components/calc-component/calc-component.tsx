@@ -8,17 +8,14 @@ import { Component, Host, h, Listen, Element, Prop } from '@stencil/core';
 export class CalcComponent {
   @Element() hostElement!: HTMLElement;
   calcDisplayElement: HTMLElement;
+  operationType: string;
+  // n1: number;
 
   @Prop() calcDisplayInput: string = '';
   @Prop() calcDisplayData: string = '';
 
   componentDidLoad() {
     this.calcDisplayElement = this.hostElement.shadowRoot.querySelector('calc-display');
-  }
-
-  setCalcDisplayInput(text: string) {
-    this.calcDisplayInput = this.calcDisplayInput + text;
-    this.calcDisplayElement.setAttribute('calc-input', this.calcDisplayInput);
   }
 
   clearCalcDisplay() {
@@ -35,18 +32,76 @@ export class CalcComponent {
     this.calcDisplayInput = '';
   }
 
+  setCalcDisplayInput(text: string) {
+    this.calcDisplayInput = this.calcDisplayInput + text;
+    this.calcDisplayElement.setAttribute('calc-input', this.calcDisplayInput);
+  }
+
+  setCalcDisplayData(text: string) {
+    const calcDataText = this.calcDisplayElement.getAttribute('calc-data');
+    this.calcDisplayData = calcDataText + text;
+    this.calcDisplayElement.setAttribute('calc-data', this.calcDisplayData);
+  }
+
   transferToDisplayData() {
     const calcInputText = this.calcDisplayElement.getAttribute('calc-input');
     this.calcDisplayElement.setAttribute('calc-data', calcInputText);
     this.clearCalcDisplayInput();
   }
 
-  onCalcButtonClickNumber() {
-    console.log('number');
+  showResult(result: string) {
+    this.calcDisplayElement.setAttribute('calc-input', result);
   }
 
-  onCalcButtonClickOperation() {
-    console.log('operation');
+  onButtonClickBasicOperations(clickType: string) {
+    let operationString = '';
+    this.operationType = clickType;
+    if (this.operationType === 'add') {
+      operationString = ' + ';
+    }
+    if (this.operationType === 'subtract') {
+      operationString = ' - ';
+    }
+    if (this.operationType === 'multiply') {
+      operationString = ' x ';
+    }
+    if (this.operationType === 'divide') {
+      operationString = ' ÷ ';
+    }
+    this.setCalcDisplayInput(operationString);
+    this.transferToDisplayData();
+  }
+
+  basicOperation() {
+    const calcInputText = this.calcDisplayElement.getAttribute('calc-input');
+    this.setCalcDisplayData(calcInputText);
+    const calcDataText = this.calcDisplayElement.getAttribute('calc-data').split(' ');
+
+    let result = 0;
+    let count = 0;
+
+    calcDataText.forEach(member => {
+      if (count === 0) {
+        result = +member;
+      }
+      if (!Number.isNaN(+member) && count !== 0) {
+        if (this.operationType === 'add') {
+          result = result + +member;
+        }
+        if (this.operationType === 'subtract') {
+          result = result - +member;
+        }
+        if (this.operationType === 'multiply') {
+          result = result * +member;
+        }
+        if (this.operationType === 'divide') {
+          result = result / +member;
+        }
+      }
+      count++;
+    });
+    this.showResult(result.toString());
+    this.operationType = '';
   }
 
   @Listen('buttonClick', { target: 'body' })
@@ -59,24 +114,11 @@ export class CalcComponent {
     if (event.detail === 'clear') {
       this.clearCalcDisplay();
     }
-    if (event.detail === 'add') {
-      this.setCalcDisplayInput(' + ');
-      this.transferToDisplayData();
-    }
-    if (event.detail === 'subtract') {
-      this.setCalcDisplayInput(' - ');
-      this.transferToDisplayData();
-    }
-    if (event.detail === 'multiply') {
-      this.setCalcDisplayInput(' x ');
-      this.transferToDisplayData();
-    }
-    if (event.detail === 'divide') {
-      this.setCalcDisplayInput(' ÷ ');
-      this.transferToDisplayData();
-    }
     if (event.detail === 'equal') {
-      this.setCalcDisplayInput('=');
+      this.basicOperation();
+    }
+    if (event.detail === 'add' || event.detail === 'subtract' || event.detail === 'multiply' || event.detail === 'divide') {
+      this.onButtonClickBasicOperations(event.detail);
     }
     if (event.detail === 'backspace') {
       this.setCalcDisplayInput('erase');
