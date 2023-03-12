@@ -9,7 +9,7 @@ export class CalcComponent {
   @Element() hostElement!: HTMLElement;
   calcDisplayElement: HTMLElement;
   operationType: string;
-  // n1: number;
+  chaningOperations = false;
 
   @Prop() calcDisplayInput: string = '';
   @Prop() calcDisplayData: string = '';
@@ -21,6 +21,7 @@ export class CalcComponent {
   clearCalcDisplay() {
     this.clearCalcDisplayData();
     this.clearCalcDisplayInput();
+    this.chaningOperations = false;
   }
 
   clearCalcDisplayData() {
@@ -33,6 +34,7 @@ export class CalcComponent {
   }
 
   setCalcDisplayInput(text: string) {
+    this.calcDisplayInput = this.calcDisplayElement.getAttribute('calc-input');
     this.calcDisplayInput = this.calcDisplayInput + text;
     this.calcDisplayElement.setAttribute('calc-input', this.calcDisplayInput);
   }
@@ -53,7 +55,7 @@ export class CalcComponent {
     this.calcDisplayElement.setAttribute('calc-input', result);
   }
 
-  onButtonClickBasicOperations(clickType: string) {
+  showOperationSymbol(clickType: string) {
     let operationString = '';
     this.operationType = clickType;
     if (this.operationType === 'add') {
@@ -68,8 +70,14 @@ export class CalcComponent {
     if (this.operationType === 'divide') {
       operationString = ' ÷ ';
     }
+    return operationString;
+  }
+
+  onButtonClickBasicOperations(clickType: string) {
+    const operationString = this.showOperationSymbol(clickType);
     this.setCalcDisplayInput(operationString);
     this.transferToDisplayData();
+    this.chaningOperations = true;
   }
 
   basicOperation() {
@@ -102,6 +110,7 @@ export class CalcComponent {
     });
     this.showResult(result.toString());
     this.operationType = '';
+    this.chaningOperations = false;
   }
 
   @Listen('buttonClick', { target: 'body' })
@@ -118,7 +127,13 @@ export class CalcComponent {
       this.basicOperation();
     }
     if (event.detail === 'add' || event.detail === 'subtract' || event.detail === 'multiply' || event.detail === 'divide') {
-      this.onButtonClickBasicOperations(event.detail);
+      if (!this.chaningOperations) {
+        this.onButtonClickBasicOperations(event.detail);
+      } else {
+        this.basicOperation();
+        this.onButtonClickBasicOperations(event.detail);
+        this.clearCalcDisplayInput();
+      }
     }
     if (event.detail === 'backspace') {
       this.setCalcDisplayInput('erase');
