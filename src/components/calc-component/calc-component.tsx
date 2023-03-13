@@ -10,6 +10,7 @@ export class CalcComponent {
   calcDisplayElement: HTMLElement;
   operationType: string;
   chaningOperations = false;
+  wasResultShowed = false;
 
   @Prop() calcDisplayInput: string = '';
   @Prop() calcDisplayData: string = '';
@@ -78,6 +79,7 @@ export class CalcComponent {
     this.setCalcDisplayInput(operationString);
     this.transferToDisplayData();
     this.chaningOperations = true;
+    this.wasResultShowed = false;
   }
 
   basicOperation() {
@@ -117,6 +119,10 @@ export class CalcComponent {
   onCalcButtonClick(event: CustomEvent) {
     for (let i = 0; i <= 9; i++) {
       if (event.detail === `number-${i}`) {
+        if (this.wasResultShowed) {
+          this.clearCalcDisplay();
+          this.wasResultShowed = false;
+        }
         this.setCalcDisplayInput(i.toString());
       }
     }
@@ -124,7 +130,10 @@ export class CalcComponent {
       this.clearCalcDisplay();
     }
     if (event.detail === 'equal') {
-      this.basicOperation();
+      if (!this.wasResultShowed) {
+        this.basicOperation();
+        this.wasResultShowed = true;
+      }
     }
     if (event.detail === 'add' || event.detail === 'subtract' || event.detail === 'multiply' || event.detail === 'divide') {
       if (!this.chaningOperations) {
@@ -136,7 +145,10 @@ export class CalcComponent {
       }
     }
     if (event.detail === 'backspace') {
-      this.setCalcDisplayInput('erase');
+      if (!this.wasResultShowed) {
+        const calcInputText = this.calcDisplayElement.getAttribute('calc-input');
+        this.calcDisplayElement.setAttribute('calc-input', calcInputText.slice(0, -1));
+      }
     }
     if (event.detail === 'sqrt') {
       this.setCalcDisplayInput('√');
