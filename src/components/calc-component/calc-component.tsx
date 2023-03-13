@@ -74,6 +74,14 @@ export class CalcComponent {
     return operationString;
   }
 
+  changeCommaToDot(enter: string) {
+    return enter.replaceAll(',', '.');
+  }
+
+  changeDotToComma(enter: string) {
+    return enter.replaceAll('.', ',');
+  }
+
   onButtonClickBasicOperations(clickType: string) {
     const operationString = this.showOperationSymbol(clickType);
     this.setCalcDisplayInput(operationString);
@@ -91,26 +99,27 @@ export class CalcComponent {
     let count = 0;
 
     calcDataText.forEach(member => {
+      const adjustedMember = +this.changeCommaToDot(member);
       if (count === 0) {
-        result = +member;
+        result = adjustedMember;
       }
       if (!Number.isNaN(+member) && count !== 0) {
         if (this.operationType === 'add') {
-          result = result + +member;
+          result = result + adjustedMember;
         }
         if (this.operationType === 'subtract') {
-          result = result - +member;
+          result = result - adjustedMember;
         }
         if (this.operationType === 'multiply') {
-          result = result * +member;
+          result = result * adjustedMember;
         }
         if (this.operationType === 'divide') {
-          result = result / +member;
+          result = result / adjustedMember;
         }
       }
       count++;
     });
-    this.showResult(result.toString());
+    this.showResult(this.changeDotToComma(result.toString()));
     this.operationType = '';
     this.chaningOperations = false;
   }
