@@ -19,6 +19,8 @@ export enum EnumButtonType {
   SQRT = 'sqrt',
   SQUARE = 'square',
   DOT = 'dot',
+  CHANGE = 'change',
+  INVERT = 'invert',
 }
 
 export enum EnumButtonColor {

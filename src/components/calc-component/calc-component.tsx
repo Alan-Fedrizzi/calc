@@ -124,6 +124,16 @@ export class CalcComponent {
     this.chaningOperations = false;
   }
 
+  invert(n: number) {
+    return 1 / n;
+  }
+
+  onButtonClickInvert() {
+    const calcInputText = +this.changeCommaToDot(this.calcDisplayElement.getAttribute('calc-input'));
+    const inverted = this.invert(calcInputText);
+    this.showResult(this.changeDotToComma(inverted.toString()));
+  }
+
   @Listen('buttonClick', { target: 'body' })
   onCalcButtonClick(event: CustomEvent) {
     for (let i = 0; i <= 9; i++) {
@@ -159,6 +169,9 @@ export class CalcComponent {
         this.calcDisplayElement.setAttribute('calc-input', calcInputText.slice(0, -1));
       }
     }
+    if (event.detail === 'invert') {
+      this.onButtonClickInvert();
+    }
     if (event.detail === 'sqrt') {
       this.setCalcDisplayInput('√');
     }
@@ -173,29 +186,31 @@ export class CalcComponent {
   render() {
     return (
       <Host class="calc-component">
-        <calc-container>
+        <calc-container class="calc-component__container">
           <div class="calc-component__column">
             <calc-display calc-data="" calc-input=""></calc-display>
             <div class="calc-component__grid">
-              <calc-button button-type="clear" button-color="green"></calc-button>
-              <calc-button button-type="sqrt"></calc-button>
+              <calc-button class="calc-component__button-big" button-type="clear" button-color="green"></calc-button>
+              <calc-button class="calc-component__button-big" button-type="backspace"></calc-button>
+              <calc-button button-type="invert"></calc-button>
               <calc-button button-type="square"></calc-button>
+              <calc-button button-type="sqrt"></calc-button>
+              <calc-button button-type="divide"></calc-button>
               <calc-button button-type="number-9"></calc-button>
               <calc-button button-type="number-8"></calc-button>
               <calc-button button-type="number-7"></calc-button>
+              <calc-button button-type="multiply"></calc-button>
               <calc-button button-type="number-6"></calc-button>
               <calc-button button-type="number-4"></calc-button>
               <calc-button button-type="number-5"></calc-button>
+              <calc-button button-type="subtract"></calc-button>
               <calc-button button-type="number-3"></calc-button>
               <calc-button button-type="number-2"></calc-button>
               <calc-button button-type="number-1"></calc-button>
+              <calc-button button-type="add"></calc-button>
+              <calc-button button-type="change"></calc-button>
               <calc-button button-type="number-0"></calc-button>
               <calc-button button-type="dot"></calc-button>
-              <calc-button button-type="backspace"></calc-button>
-              <calc-button button-type="divide"></calc-button>
-              <calc-button button-type="multiply"></calc-button>
-              <calc-button button-type="subtract"></calc-button>
-              <calc-button button-type="add"></calc-button>
               <calc-button button-type="equal" button-color="red"></calc-button>
             </div>
           </div>

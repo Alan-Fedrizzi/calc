@@ -7,8 +7,8 @@
   box-sizing: border-box;
 }
 
-:host(.calc-component) {
-  // width: var(--calc-component-width);
+:host .calc-component__container {
+  --calc-container-max-width: 318px;
 }
 
 :host .calc-component__column {
@@ -23,37 +23,12 @@
   gap: var(--calc-component-gap-grid);
 }
 
+:host .calc-component__button-big {
+  --calc-button-width: 100%;
+}
+
 // button position
-:host calc-button[button-type='number-9'] {
-  grid-column: 1;
-}
-
-:host calc-button[button-type='number-0'] {
-  grid-row: 5;
-  grid-column: 2;
-}
-
-:host calc-button[button-type='divide'] {
-  grid-row: 1;
-  grid-column: 4;
-}
-
-:host calc-button[button-type='multiply'] {
-  grid-row: 2;
-  grid-column: 4;
-}
-
-:host calc-button[button-type='subtract'] {
-  grid-row: 3;
-  grid-column: 4;
-}
-
-:host calc-button[button-type='add'] {
-  grid-row: 4;
-  grid-column: 4;
-}
-
-:host calc-button[button-type='equal'] {
-  grid-row: 5;
-  grid-column: 4;
+:host calc-button[button-type='clear'],
+:host calc-button[button-type='backspace'] {
+  grid-column: span 2;
 }

@@ -6,6 +6,7 @@
   --calc-container-border-radius: 8px;
   --calc-container-font-family: sans-serif;
   --calc-container-transition: all 0.3s ease-out;
+  --calc-container-max-width: initial;
 
   box-sizing: border-box;
 }
@@ -18,5 +19,6 @@
   border-radius: var(--calc-container-border-radius);
   font-family: var(--calc-container-font-family);
   transition: var(--calc-container-transition);
+  max-width: var(--calc-container-max-width);
   display: block;
 }

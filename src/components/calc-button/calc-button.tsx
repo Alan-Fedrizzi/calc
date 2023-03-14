@@ -45,7 +45,7 @@ export class CalcButton {
       text = <span>=</span>;
     }
     if (buttonType === EnumButtonType.BACKSPACE) {
-      text = <span class="calc-button__number">???</span>;
+      text = <span class="calc-button__text">erase</span>;
     }
     if (buttonType === EnumButtonType.SQRT) {
       text = <span class="calc-button__number">√x</span>;
@@ -55,6 +55,12 @@ export class CalcButton {
     }
     if (buttonType === EnumButtonType.DOT) {
       text = <span class="calc-button__number">,</span>;
+    }
+    if (buttonType === EnumButtonType.CHANGE) {
+      text = <span>+/-</span>;
+    }
+    if (buttonType === EnumButtonType.INVERT) {
+      text = <span class="calc-button__number">1/x</span>;
     }
 
     return (
