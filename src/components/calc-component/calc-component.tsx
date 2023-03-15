@@ -35,21 +35,31 @@ export class CalcComponent {
   }
 
   setCalcDisplayInput(text: string) {
-    this.calcDisplayInput = this.calcDisplayElement.getAttribute('calc-input');
     this.calcDisplayInput = this.calcDisplayInput + text;
     this.calcDisplayElement.setAttribute('calc-input', this.calcDisplayInput);
   }
 
   setCalcDisplayData(text: string) {
-    const calcDataText = this.calcDisplayElement.getAttribute('calc-data');
-    this.calcDisplayData = calcDataText + text;
+    this.calcDisplayData = this.calcDisplayData + text;
     this.calcDisplayElement.setAttribute('calc-data', this.calcDisplayData);
   }
 
   transferToDisplayData() {
-    const calcInputText = this.calcDisplayElement.getAttribute('calc-input');
-    this.calcDisplayElement.setAttribute('calc-data', calcInputText);
+    this.calcDisplayElement.setAttribute('calc-data', this.calcDisplayInput);
+    this.calcDisplayData = this.calcDisplayElement.getAttribute('calc-data');
     this.clearCalcDisplayInput();
+  }
+
+  getCalcDisplayInput() {
+    this.calcDisplayInput = this.calcDisplayElement.getAttribute('calc-input');
+  }
+
+  getCalcDisplayData() {
+    this.calcDisplayData = this.calcDisplayElement.getAttribute('calc-data');
+  }
+
+  showAfterComma(number: number, afterComma: number) {
+    return number.toFixed(afterComma);
   }
 
   showResult(result: string) {
@@ -84,6 +94,7 @@ export class CalcComponent {
 
   onButtonClickBasicOperations(clickType: string) {
     const operationString = this.showOperationSymbol(clickType);
+    this.getCalcDisplayInput();
     this.setCalcDisplayInput(operationString);
     this.transferToDisplayData();
     this.chaningOperations = true;
@@ -91,9 +102,8 @@ export class CalcComponent {
   }
 
   basicOperation() {
-    const calcInputText = this.calcDisplayElement.getAttribute('calc-input');
-    this.setCalcDisplayData(calcInputText);
-    const calcDataText = this.calcDisplayElement.getAttribute('calc-data').split(' ');
+    this.setCalcDisplayData(this.calcDisplayInput);
+    const calcDataText = this.calcDisplayData.split(' ');
 
     let result = 0;
     let count = 0;
@@ -129,10 +139,37 @@ export class CalcComponent {
   }
 
   onButtonClickInvert() {
-    const calcInputText = +this.changeCommaToDot(this.calcDisplayElement.getAttribute('calc-input'));
+    const calcInputText = +this.changeCommaToDot(this.calcDisplayInput);
     const inverted = this.invert(calcInputText);
-    this.showResult(this.changeDotToComma(inverted.toString()));
+    const newInverted = this.showAfterComma(inverted, 4);
+    this.showResult(this.changeDotToComma(newInverted.toString()));
   }
+
+  exponentiation(n: number, x?: number) {
+    if (x) {
+      return Math.pow(n, x);
+    }
+    return Math.pow(n, 2);
+  }
+
+  onButtonClickExponentiation() {
+    this.getCalcDisplayInput();
+    this.setCalcDisplayInput('²');
+    this.transferToDisplayData();
+    const n = +this.calcDisplayData.substring(0, this.calcDisplayData.length - 1);
+    this.exponentiation(n);
+    this.showResult(this.exponentiation(n).toString());
+    this.wasResultShowed = true;
+  }
+
+  root(n: number, x?: number) {
+    if (x) {
+      return Math.pow(n, 1 / x);
+    }
+    return Math.pow(n, 1 / 2);
+  }
+
+  onButtonClickRoot() {}
 
   @Listen('buttonClick', { target: 'body' })
   onCalcButtonClick(event: CustomEvent) {
@@ -173,12 +210,22 @@ export class CalcComponent {
       this.onButtonClickInvert();
     }
     if (event.detail === 'sqrt') {
+      console.log(this.root(+this.calcDisplayInput));
+      console.log(this.root(+this.calcDisplayInput, 3));
       this.setCalcDisplayInput('√');
     }
     if (event.detail === 'square') {
-      this.setCalcDisplayInput('²');
+      this.onButtonClickExponentiation();
     }
     if (event.detail === 'dot') {
+      if (this.calcDisplayInput === '' || this.wasResultShowed) {
+        this.clearCalcDisplay();
+        this.setCalcDisplayInput('0,');
+        this.wasResultShowed = false;
+      }
+      if (this.calcDisplayInput.indexOf(',') > -1) {
+        return;
+      }
       this.setCalcDisplayInput(',');
     }
   }
