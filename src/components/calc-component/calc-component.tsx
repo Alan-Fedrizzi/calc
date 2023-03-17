@@ -7,7 +7,7 @@ import { Component, Host, h, Listen, Element, Prop } from '@stencil/core';
 })
 export class CalcComponent {
   @Element() hostElement!: HTMLElement;
-  calcDisplayElement: HTMLElement;
+  calcDisplayElement: HTMLCalcDisplayElement;
   operationType: string;
   chaningOperations = false;
   wasResultShowed = false;
@@ -26,36 +26,36 @@ export class CalcComponent {
   }
 
   clearCalcDisplayData() {
-    this.calcDisplayElement.setAttribute('calc-data', '');
+    this.calcDisplayElement.calcData = '';
   }
 
   clearCalcDisplayInput() {
-    this.calcDisplayElement.setAttribute('calc-input', '');
+    this.calcDisplayElement.calcInput = '';
     this.calcDisplayInput = '';
   }
 
   setCalcDisplayInput(text: string) {
     this.calcDisplayInput = this.calcDisplayInput + text;
-    this.calcDisplayElement.setAttribute('calc-input', this.calcDisplayInput);
+    this.calcDisplayElement.calcInput = this.calcDisplayInput;
   }
 
   setCalcDisplayData(text: string) {
     this.calcDisplayData = this.calcDisplayData + text;
-    this.calcDisplayElement.setAttribute('calc-data', this.calcDisplayData);
+    this.calcDisplayElement.calcData = this.calcDisplayData;
   }
 
   transferToDisplayData() {
-    this.calcDisplayElement.setAttribute('calc-data', this.calcDisplayInput);
-    this.calcDisplayData = this.calcDisplayElement.getAttribute('calc-data');
+    this.calcDisplayElement.calcData = this.calcDisplayInput;
+    this.getCalcDisplayData();
     this.clearCalcDisplayInput();
   }
 
   getCalcDisplayInput() {
-    this.calcDisplayInput = this.calcDisplayElement.getAttribute('calc-input');
+    this.calcDisplayInput = this.calcDisplayElement.calcInput;
   }
 
   getCalcDisplayData() {
-    this.calcDisplayData = this.calcDisplayElement.getAttribute('calc-data');
+    this.calcDisplayData = this.calcDisplayElement.calcData;
   }
 
   showAfterComma(number: number, afterComma: number) {
@@ -63,7 +63,16 @@ export class CalcComponent {
   }
 
   showResult(result: string) {
-    this.calcDisplayElement.setAttribute('calc-input', result);
+    if (result.length > 13) {
+      const resultExponential = this.changeDotToComma(this.expo(+result, 4)).toString();
+      this.calcDisplayElement.calcInput = resultExponential;
+    } else {
+      this.calcDisplayElement.calcInput = this.changeDotToComma(result);
+    }
+  }
+
+  expo(x: number, f: number) {
+    return x.toExponential(f);
   }
 
   showOperationSymbol(clickType: string) {
@@ -129,7 +138,7 @@ export class CalcComponent {
       }
       count++;
     });
-    this.showResult(this.changeDotToComma(result.toString()));
+    this.showResult(result.toString());
     this.operationType = '';
     this.chaningOperations = false;
   }
@@ -202,8 +211,8 @@ export class CalcComponent {
     }
     if (event.detail === 'backspace') {
       if (!this.wasResultShowed) {
-        const calcInputText = this.calcDisplayElement.getAttribute('calc-input');
-        this.calcDisplayElement.setAttribute('calc-input', calcInputText.slice(0, -1));
+        const calcInputText = this.calcDisplayElement.calcInput;
+        this.calcDisplayElement.calcInput = calcInputText.slice(0, -1);
       }
     }
     if (event.detail === 'invert') {
