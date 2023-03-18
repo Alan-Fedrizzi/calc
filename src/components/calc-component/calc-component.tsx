@@ -226,6 +226,11 @@ export class CalcComponent {
     if (event.detail === 'square') {
       this.onButtonClickExponentiation();
     }
+    if (event.detail === 'change') {
+      this.getCalcDisplayInput();
+      const calcDisplayInputChangedSignal = -+this.calcDisplayInput;
+      this.calcDisplayElement.calcInput = calcDisplayInputChangedSignal.toString();
+    }
     if (event.detail === 'dot') {
       if (this.calcDisplayInput === '' || this.wasResultShowed) {
         this.clearCalcDisplay();
