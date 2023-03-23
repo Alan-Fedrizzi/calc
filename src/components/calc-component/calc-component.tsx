@@ -39,6 +39,11 @@ export class CalcComponent {
     this.calcDisplayElement.calcInput = this.calcDisplayInput;
   }
 
+  setCalcDisplayInputInFrontAndBack(textFront: string, textBack: string) {
+    this.calcDisplayInput = textFront + this.calcDisplayInput + textBack;
+    this.calcDisplayElement.calcInput = this.calcDisplayInput;
+  }
+
   setCalcDisplayData(text: string) {
     this.calcDisplayData = this.calcDisplayData + text;
     this.calcDisplayElement.calcData = this.calcDisplayData;
@@ -171,6 +176,7 @@ export class CalcComponent {
     this.wasResultShowed = true;
   }
 
+  // essa função pode ser usada para que o usuário diga o expoente da raíz (x)
   root(n: number, x?: number) {
     if (x) {
       return Math.pow(n, 1 / x);
@@ -178,7 +184,15 @@ export class CalcComponent {
     return Math.pow(n, 1 / 2);
   }
 
-  onButtonClickRoot() {}
+  onButtonClickRoot() {
+    this.getCalcDisplayInput();
+    this.setCalcDisplayInputInFrontAndBack('√(', ')');
+    this.transferToDisplayData();
+    const n = +this.calcDisplayData.substring(2, this.calcDisplayData.length - 1);
+    console.log(n);
+    this.showResult(this.root(n).toString());
+    this.wasResultShowed = true;
+  }
 
   @Listen('buttonClick', { target: 'body' })
   onCalcButtonClick(event: CustomEvent) {
@@ -219,9 +233,11 @@ export class CalcComponent {
       this.onButtonClickInvert();
     }
     if (event.detail === 'sqrt') {
-      console.log(this.root(+this.calcDisplayInput));
-      console.log(this.root(+this.calcDisplayInput, 3));
-      this.setCalcDisplayInput('√');
+      // console.log(this.root(+this.calcDisplayInput));
+      // console.log(this.root(+this.calcDisplayInput, 3));
+      // this.setCalcDisplayInput('√');
+
+      this.onButtonClickRoot();
     }
     if (event.detail === 'square') {
       this.onButtonClickExponentiation();
