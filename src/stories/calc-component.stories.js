@@ -11,7 +11,7 @@ const Template = ({ darkMode }) => {
         display: flex;
         gap: 16px;
         background: var(--background-light-general);
-        padding: 32px;
+        padding: 16px;
       }
 
       .dummy-text {

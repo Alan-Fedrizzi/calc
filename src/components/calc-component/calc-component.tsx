@@ -189,7 +189,6 @@ export class CalcComponent {
     this.setCalcDisplayInputInFrontAndBack('√(', ')');
     this.transferToDisplayData();
     const n = +this.calcDisplayData.substring(2, this.calcDisplayData.length - 1);
-    console.log(n);
     this.showResult(this.root(n).toString());
     this.wasResultShowed = true;
   }
@@ -233,10 +232,6 @@ export class CalcComponent {
       this.onButtonClickInvert();
     }
     if (event.detail === 'sqrt') {
-      // console.log(this.root(+this.calcDisplayInput));
-      // console.log(this.root(+this.calcDisplayInput, 3));
-      // this.setCalcDisplayInput('√');
-
       this.onButtonClickRoot();
     }
     if (event.detail === 'square') {
