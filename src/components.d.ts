@@ -16,8 +16,10 @@ export namespace Components {
     interface CalcComponent {
         "calcDisplayData": string;
         "calcDisplayInput": string;
+        "responsiveSize": boolean;
     }
     interface CalcContainer {
+        "responsiveSize": boolean;
     }
     interface CalcDisplay {
         "calcData": string;
@@ -70,8 +72,10 @@ declare namespace LocalJSX {
     interface CalcComponent {
         "calcDisplayData"?: string;
         "calcDisplayInput"?: string;
+        "responsiveSize"?: boolean;
     }
     interface CalcContainer {
+        "responsiveSize"?: boolean;
     }
     interface CalcDisplay {
         "calcData"?: string;

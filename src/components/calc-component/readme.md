@@ -5,10 +5,11 @@
 
 ## Properties
 
-| Property           | Attribute            | Description | Type     | Default |
-| ------------------ | -------------------- | ----------- | -------- | ------- |
-| `calcDisplayData`  | `calc-display-data`  |             | `string` | `''`    |
-| `calcDisplayInput` | `calc-display-input` |             | `string` | `''`    |
+| Property           | Attribute            | Description | Type      | Default |
+| ------------------ | -------------------- | ----------- | --------- | ------- |
+| `calcDisplayData`  | `calc-display-data`  |             | `string`  | `''`    |
+| `calcDisplayInput` | `calc-display-input` |             | `string`  | `''`    |
+| `responsiveSize`   | `responsive-size`    |             | `boolean` | `false` |
 
 
 ## Dependencies

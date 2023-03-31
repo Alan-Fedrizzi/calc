@@ -3,6 +3,13 @@
 <!-- Auto Generated Below -->
 
 
+## Properties
+
+| Property         | Attribute         | Description | Type      | Default |
+| ---------------- | ----------------- | ----------- | --------- | ------- |
+| `responsiveSize` | `responsive-size` |             | `boolean` | `false` |
+
+
 ## Dependencies
 
 ### Used by

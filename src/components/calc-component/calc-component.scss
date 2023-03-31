@@ -1,14 +1,15 @@
 :host {
-  // display: block;
-  // --calc-component-width: 100%;
+  --calc-component-width: initial;
   --calc-component-gap-column: 16px;
   --calc-component-gap-grid: 8px;
 
   box-sizing: border-box;
+  width: var(--calc-component-width);
 }
 
-:host .calc-component__container {
-  --calc-container-max-width: 318px;
+// size
+:host(.calc-component--responsive) {
+  --calc-component-width: 100%;
 }
 
 :host .calc-component__column {

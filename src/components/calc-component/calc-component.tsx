@@ -14,6 +14,7 @@ export class CalcComponent {
 
   @Prop() calcDisplayInput: string = '';
   @Prop() calcDisplayData: string = '';
+  @Prop({ reflect: true, mutable: true }) responsiveSize = false;
 
   componentDidLoad() {
     this.calcDisplayElement = this.hostElement.shadowRoot.querySelector('calc-display');
@@ -256,34 +257,41 @@ export class CalcComponent {
   }
 
   render() {
+    const { responsiveSize } = this;
+
     return (
-      <Host class="calc-component">
-        <calc-container class="calc-component__container">
+      <Host
+        class={{
+          'calc-component': true,
+          'calc-component--responsive': responsiveSize,
+        }}
+      >
+        <calc-container class="calc-component__container" responsiveSize={responsiveSize}>
           <div class="calc-component__column">
             <calc-display calc-data="" calc-input=""></calc-display>
             <div class="calc-component__grid">
-              <calc-button class="calc-component__button-big" button-type="clear" button-color="green"></calc-button>
-              <calc-button class="calc-component__button-big" button-type="backspace"></calc-button>
-              <calc-button button-type="invert"></calc-button>
-              <calc-button button-type="square"></calc-button>
-              <calc-button button-type="sqrt"></calc-button>
-              <calc-button button-type="divide"></calc-button>
-              <calc-button button-type="number-9"></calc-button>
-              <calc-button button-type="number-8"></calc-button>
-              <calc-button button-type="number-7"></calc-button>
-              <calc-button button-type="multiply"></calc-button>
-              <calc-button button-type="number-6"></calc-button>
-              <calc-button button-type="number-4"></calc-button>
-              <calc-button button-type="number-5"></calc-button>
-              <calc-button button-type="subtract"></calc-button>
-              <calc-button button-type="number-3"></calc-button>
-              <calc-button button-type="number-2"></calc-button>
-              <calc-button button-type="number-1"></calc-button>
-              <calc-button button-type="add"></calc-button>
-              <calc-button button-type="change"></calc-button>
-              <calc-button button-type="number-0"></calc-button>
-              <calc-button button-type="dot"></calc-button>
-              <calc-button button-type="equal" button-color="red"></calc-button>
+              <calc-button responsiveSize={responsiveSize} class="calc-component__button-big" button-type="clear" button-color="green"></calc-button>
+              <calc-button responsiveSize={responsiveSize} class="calc-component__button-big" button-type="backspace"></calc-button>
+              <calc-button responsiveSize={responsiveSize} button-type="invert"></calc-button>
+              <calc-button responsiveSize={responsiveSize} button-type="square"></calc-button>
+              <calc-button responsiveSize={responsiveSize} button-type="sqrt"></calc-button>
+              <calc-button responsiveSize={responsiveSize} button-type="divide"></calc-button>
+              <calc-button responsiveSize={responsiveSize} button-type="number-9"></calc-button>
+              <calc-button responsiveSize={responsiveSize} button-type="number-8"></calc-button>
+              <calc-button responsiveSize={responsiveSize} button-type="number-7"></calc-button>
+              <calc-button responsiveSize={responsiveSize} button-type="multiply"></calc-button>
+              <calc-button responsiveSize={responsiveSize} button-type="number-6"></calc-button>
+              <calc-button responsiveSize={responsiveSize} button-type="number-4"></calc-button>
+              <calc-button responsiveSize={responsiveSize} button-type="number-5"></calc-button>
+              <calc-button responsiveSize={responsiveSize} button-type="subtract"></calc-button>
+              <calc-button responsiveSize={responsiveSize} button-type="number-3"></calc-button>
+              <calc-button responsiveSize={responsiveSize} button-type="number-2"></calc-button>
+              <calc-button responsiveSize={responsiveSize} button-type="number-1"></calc-button>
+              <calc-button responsiveSize={responsiveSize} button-type="add"></calc-button>
+              <calc-button responsiveSize={responsiveSize} button-type="change"></calc-button>
+              <calc-button responsiveSize={responsiveSize} button-type="number-0"></calc-button>
+              <calc-button responsiveSize={responsiveSize} button-type="dot"></calc-button>
+              <calc-button responsiveSize={responsiveSize} button-type="equal" button-color="red"></calc-button>
             </div>
           </div>
         </calc-container>

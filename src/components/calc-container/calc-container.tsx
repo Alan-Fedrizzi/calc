@@ -1,4 +1,4 @@
-import { Component, Host, h } from '@stencil/core';
+import { Component, Host, Prop, h } from '@stencil/core';
 
 @Component({
   tag: 'calc-container',
@@ -6,9 +6,18 @@ import { Component, Host, h } from '@stencil/core';
   shadow: true,
 })
 export class CalcContainer {
+  @Prop({ reflect: true, mutable: true }) responsiveSize = false;
+
   render() {
+    const { responsiveSize } = this;
+
     return (
-      <Host class="calc-container">
+      <Host
+        class={{
+          'calc-container': true,
+          'calc-container--responsive': responsiveSize,
+        }}
+      >
         <slot></slot>
       </Host>
     );
