@@ -57,6 +57,12 @@
   }
 }
 
+// size
+:host(.calc-button--responsive) {
+  --calc-button-width: 100%;
+  flex: 1;
+}
+
 // color
 :host([button-color='green']) {
   --calc-button-background: var(--color-green);

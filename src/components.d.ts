@@ -11,6 +11,7 @@ export namespace Components {
     interface CalcButton {
         "buttonColor"?: EnumButtonColor;
         "buttonType": EnumButtonType;
+        "responsiveSize": boolean;
     }
     interface CalcComponent {
         "calcDisplayData": string;
@@ -64,6 +65,7 @@ declare namespace LocalJSX {
         "buttonColor"?: EnumButtonColor;
         "buttonType"?: EnumButtonType;
         "onButtonClick"?: (event: CalcButtonCustomEvent<string>) => void;
+        "responsiveSize"?: boolean;
     }
     interface CalcComponent {
         "calcDisplayData"?: string;

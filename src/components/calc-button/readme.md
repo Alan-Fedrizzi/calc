@@ -5,10 +5,11 @@
 
 ## Properties
 
-| Property      | Attribute      | Description | Type                                           | Default     |
-| ------------- | -------------- | ----------- | ---------------------------------------------- | ----------- |
-| `buttonColor` | `button-color` |             | `EnumButtonColor.GREEN \| EnumButtonColor.RED` | `undefined` |
-| `buttonType`  | `button-type`  |             | `EnumButtonType`                               | `undefined` |
+| Property         | Attribute         | Description | Type                                           | Default     |
+| ---------------- | ----------------- | ----------- | ---------------------------------------------- | ----------- |
+| `buttonColor`    | `button-color`    |             | `EnumButtonColor.GREEN \| EnumButtonColor.RED` | `undefined` |
+| `buttonType`     | `button-type`     |             | `EnumButtonType`                               | `undefined` |
+| `responsiveSize` | `responsive-size` |             | `boolean`                                      | `false`     |
 
 
 ## Events

@@ -9,6 +9,7 @@ import { EnumButtonColor, EnumButtonType } from '../../utils/utils';
 export class CalcButton {
   @Prop({ reflect: true }) buttonType: EnumButtonType;
   @Prop({ reflect: true }) buttonColor?: EnumButtonColor;
+  @Prop({ reflect: true, mutable: true }) responsiveSize = false;
 
   @Event({ bubbles: true, composed: true }) buttonClick: EventEmitter<string>;
 
@@ -17,7 +18,7 @@ export class CalcButton {
   }
 
   render() {
-    const { buttonType, onButtonClick } = this;
+    const { buttonType, onButtonClick, responsiveSize } = this;
 
     let text: string;
 
@@ -64,7 +65,13 @@ export class CalcButton {
     }
 
     return (
-      <Host class="calc-button" onClick={onButtonClick.bind(this, buttonType)}>
+      <Host
+        class={{
+          'calc-button': true,
+          'calc-button--responsive': responsiveSize,
+        }}
+        onClick={onButtonClick.bind(this, buttonType)}
+      >
         <button class="calc-button__content">{text}</button>
       </Host>
     );
