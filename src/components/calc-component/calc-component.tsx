@@ -64,6 +64,18 @@ export class CalcComponent {
     this.calcDisplayData = this.calcDisplayElement.calcData;
   }
 
+  // criar método que verifica se string tem 'e'
+  // se tiver, desconstruir e converter em número normal
+  convertScientificToNumber() {
+    this.getCalcDisplayInput();
+    console.log(this.calcDisplayInput);
+    console.log(this.calcDisplayInput.includes('e'));
+    // if (this.calcDisplayInput.includes('e')) {
+
+    // }
+    // const isScientificNotation
+  }
+
   showAfterComma(number: number, afterComma: number) {
     return number.toFixed(afterComma);
   }
@@ -266,6 +278,7 @@ export class CalcComponent {
           'calc-component--responsive': responsiveSize,
         }}
       >
+        <calc-button onClick={this.convertScientificToNumber.bind(this)}></calc-button>
         <calc-container class="calc-component__container" responsiveSize={responsiveSize}>
           <div class="calc-component__column">
             <calc-display calc-data="" calc-input=""></calc-display>
