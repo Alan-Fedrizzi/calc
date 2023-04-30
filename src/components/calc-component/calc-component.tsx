@@ -66,7 +66,6 @@ export class CalcComponent {
 
   convertScientificToNumber(stringOfANumber: string) {
     const isScientificNotation = stringOfANumber.includes('e');
-    console.log(isScientificNotation);
     if (isScientificNotation) {
       const inputStringArray = stringOfANumber.split('e');
       const baseNumber = +this.changeCommaToDot(inputStringArray[0]);
@@ -204,8 +203,10 @@ export class CalcComponent {
     this.getCalcDisplayInput();
     this.setCalcDisplayInputInFrontAndBack('√(', ')');
     this.transferToDisplayData();
-    const n = +this.calcDisplayData.substring(2, this.calcDisplayData.length - 1);
-    this.showResult(this.root(n).toString());
+    const numberInString = this.calcDisplayData.substring(2, this.calcDisplayData.length - 1);
+    const number = this.convertScientificToNumber(numberInString);
+    const result = this.root(number);
+    this.showResult(result.toString());
     this.wasResultShowed = true;
   }
 
