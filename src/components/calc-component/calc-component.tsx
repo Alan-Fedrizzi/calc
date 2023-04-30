@@ -77,14 +77,21 @@ export class CalcComponent {
     }
   }
 
+  // currently not in use
   showAfterComma(number: number, afterComma: number) {
     return number.toFixed(afterComma);
   }
 
   showResult(result: string) {
+    if (result === 'NaN') {
+      this.calcDisplayElement.calcInput = 'Error';
+      return;
+    }
     if (result.length > 13) {
-      const resultExponential = this.changeDotToComma(this.expo(+result, 4)).toString();
-      this.calcDisplayElement.calcInput = resultExponential;
+      const treatedNumber = +this.changeCommaToDot(result);
+      const expoNumber = this.expo(treatedNumber, 4);
+      const expoNumberWithDot = this.changeDotToComma(expoNumber);
+      this.calcDisplayElement.calcInput = expoNumberWithDot;
     } else {
       this.calcDisplayElement.calcInput = this.changeDotToComma(result);
     }
@@ -167,10 +174,14 @@ export class CalcComponent {
   }
 
   onButtonClickInvert() {
-    const calcInputText = +this.changeCommaToDot(this.calcDisplayInput);
-    const inverted = this.invert(calcInputText);
-    const newInverted = this.showAfterComma(inverted, 4);
-    this.showResult(this.changeDotToComma(newInverted.toString()));
+    this.getCalcDisplayInput();
+    this.setCalcDisplayInputInFrontAndBack('1 / ', '');
+    this.transferToDisplayData();
+    const fraction = this.calcDisplayData.replaceAll(' ', '').split('/');
+    const denominator = +this.changeCommaToDot(fraction[1]);
+    const inverted = this.invert(denominator);
+    const result = this.changeDotToComma(inverted.toString());
+    this.showResult(result);
   }
 
   exponentiation(n: number, x?: number) {
@@ -282,7 +293,6 @@ export class CalcComponent {
           'calc-component--responsive': responsiveSize,
         }}
       >
-        <calc-button class="delete-me" onClick={this.convertScientificToNumber.bind(this)}></calc-button>
         <calc-container class="calc-component__container" responsiveSize={responsiveSize}>
           <div class="calc-component__column">
             <calc-display calc-data="" calc-input=""></calc-display>
