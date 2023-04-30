@@ -221,6 +221,19 @@ export class CalcComponent {
     this.wasResultShowed = true;
   }
 
+  // mapear teclas
+  // números de 0 a 9
+  // basic operations: + - * /
+  // Enter ou =
+  // backspace
+
+  // quando tecla emitir o buttonClick para o body ou executar os métodos??
+  // não funciona, pq??
+  @Listen('keydown')
+  onKeyPress(event: KeyboardEvent) {
+    console.log(event.key);
+  }
+
   @Listen('buttonClick', { target: 'body' })
   onCalcButtonClick(event: CustomEvent) {
     for (let i = 0; i <= 9; i++) {
