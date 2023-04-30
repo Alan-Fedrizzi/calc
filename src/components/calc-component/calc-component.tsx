@@ -64,16 +64,18 @@ export class CalcComponent {
     this.calcDisplayData = this.calcDisplayElement.calcData;
   }
 
-  // criar método que verifica se string tem 'e'
-  // se tiver, desconstruir e converter em número normal
-  convertScientificToNumber() {
-    this.getCalcDisplayInput();
-    console.log(this.calcDisplayInput);
-    console.log(this.calcDisplayInput.includes('e'));
-    // if (this.calcDisplayInput.includes('e')) {
-
-    // }
-    // const isScientificNotation
+  convertScientificToNumber(stringOfANumber: string) {
+    const isScientificNotation = stringOfANumber.includes('e');
+    console.log(isScientificNotation);
+    if (isScientificNotation) {
+      const inputStringArray = stringOfANumber.split('e');
+      const baseNumber = +this.changeCommaToDot(inputStringArray[0]);
+      const expo = +inputStringArray[1];
+      const result = baseNumber * this.exponentiation(10, expo);
+      return result;
+    } else {
+      return +stringOfANumber;
+    }
   }
 
   showAfterComma(number: number, afterComma: number) {
@@ -181,11 +183,12 @@ export class CalcComponent {
 
   onButtonClickExponentiation() {
     this.getCalcDisplayInput();
-    this.setCalcDisplayInput('²');
+    this.setCalcDisplayInputInFrontAndBack('(', ')²');
     this.transferToDisplayData();
-    const n = +this.calcDisplayData.substring(0, this.calcDisplayData.length - 1);
-    this.exponentiation(n);
-    this.showResult(this.exponentiation(n).toString());
+    const numberInString = this.calcDisplayData.substring(1, this.calcDisplayData.length - 2);
+    const number = this.convertScientificToNumber(numberInString);
+    const result = this.exponentiation(number);
+    this.showResult(result.toString());
     this.wasResultShowed = true;
   }
 
@@ -278,7 +281,7 @@ export class CalcComponent {
           'calc-component--responsive': responsiveSize,
         }}
       >
-        <calc-button onClick={this.convertScientificToNumber.bind(this)}></calc-button>
+        <calc-button class="delete-me" onClick={this.convertScientificToNumber.bind(this)}></calc-button>
         <calc-container class="calc-component__container" responsiveSize={responsiveSize}>
           <div class="calc-component__column">
             <calc-display calc-data="" calc-input=""></calc-display>
