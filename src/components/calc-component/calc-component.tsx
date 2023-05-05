@@ -221,23 +221,23 @@ export class CalcComponent {
     this.wasResultShowed = true;
   }
 
-  // mapear teclas
-  // números de 0 a 9
-  // basic operations: + - * /
-  // Enter ou =
-  // backspace
-
-  // quando tecla emitir o buttonClick para o body ou executar os métodos??
-  // não funciona, pq??
-  @Listen('keydown')
-  onKeyPress(event: KeyboardEvent) {
-    console.log(event.key);
+  executeBackspace() {
+    if (!this.wasResultShowed) {
+      const calcInputText = this.calcDisplayElement.calcInput;
+      this.calcDisplayElement.calcInput = calcInputText.slice(0, -1);
+    }
   }
 
-  @Listen('buttonClick', { target: 'body' })
-  onCalcButtonClick(event: CustomEvent) {
+  executeEqual() {
+    if (!this.wasResultShowed) {
+      this.basicOperation();
+      this.wasResultShowed = true;
+    }
+  }
+
+  executeNumber(emittedEvent: string) {
     for (let i = 0; i <= 9; i++) {
-      if (event.detail === `number-${i}`) {
+      if (emittedEvent === `number-${i}`) {
         if (this.wasResultShowed) {
           this.clearCalcDisplay();
           this.wasResultShowed = false;
@@ -245,29 +245,72 @@ export class CalcComponent {
         this.setCalcDisplayInput(i.toString());
       }
     }
+  }
+
+  executeOperation(operation: string) {
+    if (!this.chaningOperations) {
+      this.onButtonClickBasicOperations(operation);
+    } else {
+      this.basicOperation();
+      this.onButtonClickBasicOperations(operation);
+      this.clearCalcDisplayInput();
+    }
+  }
+
+  @Listen('keydown', { target: 'window' })
+  onKeyPress(event: KeyboardEvent) {
+    if (event.key === '=' || event.key === 'Enter') {
+      this.executeEqual();
+      console.log(`dentro: ${event.key}`);
+      // = funciona, Enter não funciona
+      // = funciona, Enter não funciona
+      // = funciona, Enter não funciona
+    }
+    if (event.key === 'Backspace') {
+      this.executeBackspace();
+    }
+    if (event.key === 'Escape') {
+      this.clearCalcDisplay();
+    }
+    if (event.key === '+') {
+      this.executeOperation('add');
+    }
+    if (event.key === '-') {
+      this.executeOperation('subtract');
+    }
+    if (event.key === '*') {
+      this.executeOperation('multiply');
+    }
+    if (event.key === '/') {
+      this.executeOperation('divide');
+    }
+    if (!Number.isNaN(+event.key)) {
+      // não funciona direito, as vezes falha!!!!!
+      // não funciona direito, as vezes falha!!!!!
+      // não funciona direito, as vezes falha!!!!!
+      this.executeNumber(`number-${event.key}`);
+      // não funciona direito, as vezes falha!!!!!
+      // não funciona direito, as vezes falha!!!!!
+      // não funciona direito, as vezes falha!!!!!
+    }
+  }
+
+  @Listen('buttonClick', { target: 'body' })
+  onCalcButtonClick(event: CustomEvent) {
+    if (event.detail.startsWith('number-')) {
+      this.executeNumber(event.detail);
+    }
     if (event.detail === 'clear') {
       this.clearCalcDisplay();
     }
     if (event.detail === 'equal') {
-      if (!this.wasResultShowed) {
-        this.basicOperation();
-        this.wasResultShowed = true;
-      }
+      this.executeEqual();
     }
     if (event.detail === 'add' || event.detail === 'subtract' || event.detail === 'multiply' || event.detail === 'divide') {
-      if (!this.chaningOperations) {
-        this.onButtonClickBasicOperations(event.detail);
-      } else {
-        this.basicOperation();
-        this.onButtonClickBasicOperations(event.detail);
-        this.clearCalcDisplayInput();
-      }
+      this.executeOperation(event.detail);
     }
     if (event.detail === 'backspace') {
-      if (!this.wasResultShowed) {
-        const calcInputText = this.calcDisplayElement.calcInput;
-        this.calcDisplayElement.calcInput = calcInputText.slice(0, -1);
-      }
+      this.executeBackspace();
     }
     if (event.detail === 'invert') {
       this.onButtonClickInvert();
