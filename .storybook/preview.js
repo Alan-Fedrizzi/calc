@@ -13,7 +13,6 @@ export const parameters = {
     },
   },
   themes: {
-    // target: 'root',
     default: 'Light',
     list: [
       {
