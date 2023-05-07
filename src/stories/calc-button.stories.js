@@ -5,19 +5,21 @@ export default {
   title: 'Components/Calc Button',
 };
 
-const Template = ({ buttonType, buttonColor, darkMode, responsiveSize }) => {
+const Template = ({ buttonType, buttonColor, responsiveSize }) => {
   return html`
     <style>
       .container {
         display: flex;
         gap: 16px;
         background: var(--background-light-general);
-        height: 300px;
+        height: auto;
+        width: 100%;
         padding: 32px;
+        box-sizing: border-box;
       }
     </style>
 
-    <div class="container ${darkMode ? 'dark-mode' : ''}">
+    <div class="container">
       <!-- component markdown -->
       <calc-button button-type=${buttonType} button-color=${buttonColor} ?responsive-size=${responsiveSize}></calc-button>
       <!-- !component markdown -->
@@ -43,11 +45,6 @@ Default.argTypes = {
   },
   responsiveSize: {
     responsiveSize: false,
-    control: { type: 'boolean' },
-    defautlValue: false,
-  },
-  darkMode: {
-    darkMode: false,
     control: { type: 'boolean' },
     defautlValue: false,
   },

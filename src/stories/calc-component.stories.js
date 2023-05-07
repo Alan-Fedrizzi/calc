@@ -4,28 +4,21 @@ export default {
   title: 'Components/Calc Component',
 };
 
-const Template = ({ darkMode, responsiveSize }) => {
+const Template = ({ responsiveSize }) => {
   return html`
     <style>
       .container {
         display: flex;
         gap: 16px;
         background: var(--background-light-general);
-        padding: 16px;
-      }
-
-      .dummy-text {
-        color: var(--color-dark-2);
-      }
-
-      .oie {
-        height: 24px;
-        width: 24px;
-        stroke: red;
+        height: auto;
+        width: 100%;
+        padding: 32px;
+        box-sizing: border-box;
       }
     </style>
 
-    <div class="container ${darkMode ? 'dark-mode' : ''}">
+    <div class="container">
       <!-- component markdown -->
       <calc-component ?responsive-size=${responsiveSize}></calc-component>
       <!-- !component markdown -->
@@ -40,9 +33,5 @@ Default.argTypes = {
     control: { type: 'boolean' },
     defautlValue: false,
   },
-  darkMode: {
-    darkMode: false,
-    control: { type: 'boolean' },
-    defautlValue: false,
-  },
+
 };

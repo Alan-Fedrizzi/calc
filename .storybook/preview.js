@@ -12,4 +12,19 @@ export const parameters = {
       date: /Date$/,
     },
   },
+  themes: {
+    // target: 'root',
+    default: 'Light',
+    list: [
+      {
+        name: 'Light',
+        color: '#f8f9fa',
+      },
+      {
+        name: 'Dark',
+        class: ['dark-mode'],
+        color: '#212529',
+      },
+    ],
+  },
 };
