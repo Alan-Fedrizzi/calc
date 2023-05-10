@@ -73,7 +73,7 @@ export class CalcComponent {
       const result = baseNumber * this.exponentiation(10, expo);
       return result;
     } else {
-      return +stringOfANumber;
+      return +this.changeCommaToDot(stringOfANumber);
     }
   }
 
@@ -323,8 +323,8 @@ export class CalcComponent {
     }
     if (event.detail === 'change') {
       this.getCalcDisplayInput();
-      const calcDisplayInputChangedSignal = -+this.calcDisplayInput;
-      this.calcDisplayElement.calcInput = calcDisplayInputChangedSignal.toString();
+      const number = -this.convertScientificToNumber(this.calcDisplayInput);
+      this.showResult(number.toString());
     }
     if (event.detail === 'dot') {
       if (this.calcDisplayInput === '' || this.wasResultShowed) {

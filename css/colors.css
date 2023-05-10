@@ -1,9 +1,9 @@
 :root {
   --background-light-general: #f8f9fa;
-  --background-dark-general: #212529;
+  --background-dark-general: #2f343a;
   --color-light-1: #f1f3f5;
   --color-light-2: #dee2e6;
-  --color-dark-1: #343a40;
+  --color-dark-1: #484e53;
   --color-dark-2: #495057;
   --color-green: #7effa5;
   --color-green-hover: #60fd8f;
@@ -11,9 +11,9 @@
   --color-red-hover: #ff9888;
 }
 :root .dark-mode {
-  --background-light-general: #212529;
+  --background-light-general: #2f343a;
   --background-dark-general: #f8f9fa;
-  --color-light-1: #343a40;
+  --color-light-1: #484e53;
   --color-light-2: #495057;
   --color-dark-1: #f1f3f5;
   --color-dark-2: #dee2e6;
